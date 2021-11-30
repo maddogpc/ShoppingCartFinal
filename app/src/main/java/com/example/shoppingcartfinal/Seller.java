@@ -8,6 +8,11 @@ public class Seller extends User {
     }
 
     @Override
+    public void addAttributes() {
+        System.out.println("test");
+    }
+
+    @Override
     public boolean buyerOrSeller() {
         return false;
     }

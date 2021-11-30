@@ -28,12 +28,8 @@ public abstract class User {
         this.email = email;
     }
 
-    public void Initialize()
-    {
-        isSeller = buyerOrSeller();
-    }
-
     public abstract boolean buyerOrSeller();
+    public abstract void addAttributes();
 
     User(String firstName, String lastName, String email)
     {

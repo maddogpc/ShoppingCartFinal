@@ -10,12 +10,7 @@ public class Buyer extends User {
     }
     @Override
     public void addAttributes() {
-        if (positionNo == 0)
-        {
-            return false;
-        }
-        else
-            return true;
+        System.out.println("test");
     }
 
     @Override
