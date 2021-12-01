@@ -6,6 +6,8 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -26,11 +28,28 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
+    Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        login = (Button)findViewById(R.id.loginButton);
+        mAuth = FirebaseAuth.getInstance();
+        requestGoogleLogin();
+        login.setOnClickListener(view -> GoogleLogin());
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null)
+        {
+            // If there is a user already logged in, then an intent will cause the application to display the main application
+            Intent intent = new Intent(MainActivity.this, PostLoginDashboard.class);
+            startActivity(intent);
+        }
+
     }
     private void requestGoogleLogin() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -43,22 +62,23 @@ public class MainActivity extends AppCompatActivity {
     private void GoogleLogin() {
         Intent login = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(login, RC_SIGN_IN);
+        System.out.println("eee");
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        System.out.println("re " + requestCode);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                //Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+                System.out.println("firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                //Log.w(TAG, "Google sign in failed", e);
+                System.out.println("Google sign in failed");
             }
         }
     }
@@ -73,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             //Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            System.out.println("Ddd");
                             Intent intent = new Intent(MainActivity.this, PostLoginDashboard.class);
+                            startActivity(intent);
                             //updateUI(user);
                         } else {
 

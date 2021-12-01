@@ -1,13 +1,14 @@
 package com.example.shoppingcartfinal;
 
 public class Buyer extends User {
-    String firstName, lastName, email;
+    String name, email;
     int positionNo;
-    public Buyer(String firstName, String lastName, String email, int positionNo)
-    {
-        super(firstName, lastName, email);
+
+    public Buyer(String name, String email, int positionNo) {
+        super(name, email);
         this.positionNo = positionNo;
     }
+
     @Override
     public void addAttributes() {
         System.out.println("test");

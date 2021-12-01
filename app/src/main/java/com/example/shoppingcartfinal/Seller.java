@@ -1,10 +1,14 @@
 package com.example.shoppingcartfinal;
 
 public class Seller extends User {
-    String firstName, lastName, email;
+    String name, email;
+    int positionNo;
 
-    Seller(String firstName, String lastName, String email) {
-        super(firstName, lastName, email);
+    Seller(String name, String email, int positionNo) {
+
+        super(name, email);
+        this.positionNo = positionNo;
+        isBuyerOrSeller();
     }
 
     @Override
@@ -14,6 +18,9 @@ public class Seller extends User {
 
     @Override
     public boolean buyerOrSeller() {
-        return false;
+        if (positionNo == 1)
+            return true;
+        else
+            return false;
     }
 }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ShoppingCartFinal</string>
     <string name="web_client_id">170358494628-cb6sr14jnrft4t0r6a0ostlnvpdak6rq.apps.googleusercontent.com</string>
+    <string name="login">Login</string>
 </resources>
