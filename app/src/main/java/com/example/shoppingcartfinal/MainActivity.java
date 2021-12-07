@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -70,14 +72,26 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("re " + requestCode);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            /*Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
+                System.out.println("re2 " + requestCode);
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 System.out.println("firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
+                System.out.println("Google sign in failed");
+            }*/
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            System.out.println("re 2" + result.getStatus());
+            if (result.isSuccess())
+            {
+                GoogleSignInAccount account = result.getSignInAccount();
+                firebaseAuthWithGoogle(account.getIdToken());
+            }
+            else
+            {
                 System.out.println("Google sign in failed");
             }
         }
@@ -89,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        System.out.println(task.getException());
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             //Log.d(TAG, "signInWithCredential:success");
@@ -103,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
                             //Log.w(TAG, "signInWithCredential:failure", task.getException());
                             //updateUI(null);
                             CoordinatorLayout mBinding = findViewById(R.id.layout);
-                            Snackbar.make(mBinding, "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+                            System.out.println("Authentication failed");
+                            //Snackbar.make(mBinding, "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">ShoppingCartFinal</string>
-    <string name="web_client_id">170358494628-cb6sr14jnrft4t0r6a0ostlnvpdak6rq.apps.googleusercontent.com</string>
     <string name="login">Login</string>
+    <string name="web_client_id">17517497229-t44ahlp2dl32e3u3qhmutqs12cuf6m67.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="toShoppingCart">toShoppingCart</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="inventory">Inventory</string>
 </resources>

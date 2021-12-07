@@ -3,10 +3,12 @@ package com.example.shoppingcartfinal;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +25,8 @@ public class InventoryFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button toSDash;
 
     public InventoryFragment() {
         // Required empty public constructor
@@ -59,6 +63,17 @@ public class InventoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inventory, container, false);
+        View view = inflater.inflate(R.layout.fragment_inventory, container, false);
+        // Get ViewModel
+        // To Shopping Cart button
+        toSDash = (Button) view.findViewById(R.id.toSDash);
+
+        toSDash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.sellerDashFragment);
+            }
+        });
+        return view;
     }
 }

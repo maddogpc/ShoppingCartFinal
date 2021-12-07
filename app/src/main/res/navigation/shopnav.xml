@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/shopnav">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shopnav"
+    app:startDestination="@id/buyerDashFragment">
 
+    <fragment
+        android:id="@+id/buyerDashFragment"
+        android:name="com.example.shoppingcartfinal.BuyerDashFragment"
+        android:label="fragment_buyer_dash"
+        tools:layout="@layout/fragment_buyer_dash" >
+        <action
+            android:id="@+id/action_buyerDashFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingCartFragment"
+        android:name="com.example.shoppingcartfinal.ShoppingCartFragment"
+        android:label="fragment_shopping_cart"
+        tools:layout="@layout/fragment_shopping_cart" >
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_buyerDashFragment"
+            app:destination="@id/buyerDashFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerDashFragment"
+        android:name="com.example.shoppingcartfinal.SellerDashFragment"
+        android:label="fragment_seller_dash"
+        tools:layout="@layout/fragment_seller_dash" >
+        <action
+            android:id="@+id/action_sellerDashFragment_to_inventoryFragment"
+            app:destination="@id/inventoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inventoryFragment"
+        android:name="com.example.shoppingcartfinal.InventoryFragment"
+        android:label="fragment_inventory"
+        tools:layout="@layout/fragment_inventory" >
+        <action
+            android:id="@+id/action_inventoryFragment_to_sellerDashFragment"
+            app:destination="@id/sellerDashFragment" />
+    </fragment>
 </navigation>
