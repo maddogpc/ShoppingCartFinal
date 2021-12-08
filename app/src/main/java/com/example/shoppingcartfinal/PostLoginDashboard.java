@@ -85,6 +85,7 @@ public class PostLoginDashboard extends AppCompatActivity {
                                 User currentUser2 = new Seller(currentUser.getName(), currentUser.getEmail());
                                 System.out.println("changed status");
                                 concreteViewModel.setUser(currentUser2);
+                                System.out.println("d " + currentUser2.getSellerStatus());
                                 selectFragment(currentUser2);
                             }
                         }
@@ -125,6 +126,7 @@ public class PostLoginDashboard extends AppCompatActivity {
             System.out.println("Set to Seller Fragment");
             index = sdf;
         }
-        getSupportFragmentManager().beginTransaction().replace(R.id.shopnav, index).commit();
+        System.out.println("dd");
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView2, index).commit();
     }
 }

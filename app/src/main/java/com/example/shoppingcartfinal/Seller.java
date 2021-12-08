@@ -9,6 +9,7 @@ public class Seller extends User {
     Seller(String name, String email) {
 
         super(name, email);
+        setStatus(true);
     }
 
     @Override
