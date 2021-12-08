@@ -22,11 +22,19 @@ public abstract class User {
 
     public boolean getSellerStatus() { return isSeller; }
 
-    public abstract boolean buyerOrSeller();
+    public abstract int promote(boolean pos);
     public abstract void addAttributes();
 
-    public void isBuyerOrSeller() {
-        isSeller = buyerOrSeller();
+    public void setStatus(boolean pos) {
+        int position = promote(pos);
+        if (position == 0)
+        {
+            isSeller = false;
+        }
+        else
+        {
+            isSeller = true;
+        }
     }
 
     User(String name, String email)

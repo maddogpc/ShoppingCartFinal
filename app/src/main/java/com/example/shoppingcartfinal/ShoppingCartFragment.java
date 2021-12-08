@@ -70,7 +70,7 @@ public class ShoppingCartFragment extends Fragment {
         toBDash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.shoppingCartFragment);
+                Navigation.findNavController(view).navigate(R.id.buyerDashFragment);
             }
         });
         return view;

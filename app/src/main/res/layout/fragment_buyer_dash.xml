@@ -6,15 +6,26 @@
     tools:context=".BuyerDashFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/toShoppingCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/toShoppingCart" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:text="@string/shopping_cart_viewer" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="639dp" />
+
+        <Button
+            android:id="@+id/toShoppingCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toShoppingCart" />
+    </LinearLayout>
 
 </FrameLayout>

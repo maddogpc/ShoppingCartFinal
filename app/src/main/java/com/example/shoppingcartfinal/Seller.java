@@ -1,14 +1,14 @@
 package com.example.shoppingcartfinal;
 
+import android.widget.Toast;
+
 public class Seller extends User {
     String name, email;
     int positionNo;
 
-    Seller(String name, String email, int positionNo) {
+    Seller(String name, String email) {
 
         super(name, email);
-        this.positionNo = positionNo;
-        isBuyerOrSeller();
     }
 
     @Override
@@ -17,10 +17,15 @@ public class Seller extends User {
     }
 
     @Override
-    public boolean buyerOrSeller() {
-        if (positionNo == 1)
-            return true;
+    public int promote(boolean pos) {
+        if (pos == true)
+        {
+            this.positionNo = 1;
+        }
         else
-            return false;
+        {
+            this.positionNo = 0;
+        }
+        return positionNo;
     }
 }

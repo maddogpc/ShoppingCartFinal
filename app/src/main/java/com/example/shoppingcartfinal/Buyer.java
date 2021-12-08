@@ -4,9 +4,9 @@ public class Buyer extends User {
     String name, email;
     int positionNo;
 
-    public Buyer(String name, String email, int positionNo) {
+    public Buyer(String name, String email) {
         super(name, email);
-        this.positionNo = positionNo;
+        this.positionNo = 0;
     }
 
     @Override
@@ -15,13 +15,16 @@ public class Buyer extends User {
     }
 
     @Override
-    public boolean buyerOrSeller() {
-        if (positionNo == 0)
+    public int promote(boolean pos) {
+        if (pos == true)
         {
-            return false;
+            this.positionNo = 1;
         }
         else
-            return true;
+        {
+            this.positionNo = 0;
+        }
+        return positionNo;
     }
 
 }

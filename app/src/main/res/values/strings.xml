@@ -7,4 +7,5 @@
     <string name="toShoppingCart">toShoppingCart</string>
     <string name="dashboard">Dashboard</string>
     <string name="inventory">Inventory</string>
+    <string name="shopping_cart_viewer">Shopping Cart Viewer</string>
 </resources>
