@@ -34,7 +34,7 @@ public class PostLoginDashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_login_dashboard);
 
-        User currentUser = new Buyer(user_name_g, user_email_g);
+        final User currentUser = new Buyer(user_name_g, user_email_g);
 
         // Ensures that the user is signed in
         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this );
@@ -52,21 +52,50 @@ public class PostLoginDashboard extends AppCompatActivity {
             final String user_name = signInAccount.getDisplayName();
             user_name_g = user_name;
             user_email_g = signInAccount.getEmail();
+            // Update user class in app
+            currentUser.setName(user_name_g);
+            currentUser.setEmail(user_email_g);
+            currentUser.setStatus(user_posNo_gs);
+
+            System.out.println("Will call avel");
+            // Assign a new user object to existing currentUser object to update the user class upon reading Firebase data
+            User finalCurrentUser = currentUser;
+            ConcreteViewModel concreteViewModel = new ConcreteViewModel(finalCurrentUser);
             // Read from the database
             user.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists())
                     {
+                        System.out.println("Calling avel");
                         try {
+                            // Assigning temporary attributes to data from DB
                             user_name_g = snapshot.child(user_name).child("name").getValue(String.class);
                             user_email_g = snapshot.child(user_name).child("email").getValue(String.class);
                             user_posNo_gs = snapshot.child(user_name).child("sellerStatus").getValue(Boolean.class);
                             System.out.println("name: " + user_name_g + ", email: " + user_email_g + ", sellerStatus: " + user_posNo_gs);
+                            hasDatabase = true;
+                            // Change attributes of user in listener
+                            finalCurrentUser.setName(user_name_g);
+                            finalCurrentUser.setEmail(user_email_g);
+                            finalCurrentUser.setStatus(user_posNo_gs);
+                            // Change fragment when user has seller status
+                            if (finalCurrentUser.getSellerStatus() == true)
+                            {
+                                User currentUser2 = new Seller(currentUser.getName(), currentUser.getEmail());
+                                System.out.println("changed status");
+                                concreteViewModel.setUser(currentUser2);
+                                selectFragment(currentUser2);
+                            }
                         }
                         catch (NullPointerException npe) {
                             System.out.println("Null pointer");
                         }
+                    }
+                    else
+                    {
+                        // Write to the database
+                        user.child(user_name).setValue(finalCurrentUser);
                     }
                 }
 
@@ -75,18 +104,8 @@ public class PostLoginDashboard extends AppCompatActivity {
                     System.out.println("No values found in the database");
                 }
             });
-            // Update user class in app
-            currentUser.setName(user_name_g);
-            currentUser.setEmail(user_email_g);
-            currentUser.setStatus(user_posNo_gs);
-            // Write to the database
-            user.child(user_name).setValue(currentUser);
-        }
+            System.out.println("status 1 " + currentUser.getSellerStatus());
 
-        if (currentUser.getSellerStatus() == true)
-        {
-            currentUser = new Seller("", "");
-            selectFragment(currentUser);
         }
 
         bdf = new BuyerDashFragment();
@@ -98,10 +117,12 @@ public class PostLoginDashboard extends AppCompatActivity {
         Fragment index;
         if (user.getSellerStatus() == false)
         {
+            System.out.println("Set to Buyer Fragment");
             index = bdf;
         }
         else
         {
+            System.out.println("Set to Seller Fragment");
             index = sdf;
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.shopnav, index).commit();
