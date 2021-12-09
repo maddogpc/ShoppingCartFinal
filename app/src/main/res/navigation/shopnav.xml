@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/shopnav"
-    >
+    app:startDestination="@id/buyerDashFragment">
 
     <fragment
         android:id="@+id/buyerDashFragment"
@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_buyerDashFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
+        <action
+            android:id="@+id/action_buyerDashFragment_to_productPageFragment"
+            app:destination="@id/productPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/shoppingCartFragment"
@@ -22,6 +25,9 @@
         <action
             android:id="@+id/action_shoppingCartFragment_to_buyerDashFragment"
             app:destination="@id/buyerDashFragment" />
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellerDashFragment"
@@ -40,5 +46,50 @@
         <action
             android:id="@+id/action_inventoryFragment_to_sellerDashFragment"
             app:destination="@id/sellerDashFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productPageFragment"
+        android:name="com.example.shoppingcartfinal.ProductPageFragment"
+        android:label="fragment_product_page"
+        tools:layout="@layout/fragment_product_page" >
+        <action
+            android:id="@+id/action_productPageFragment_to_buyerDashFragment"
+            app:destination="@id/buyerDashFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.example.shoppingcartfinal.CheckoutFragment"
+        android:label="fragment_checkout"
+        tools:layout="@layout/fragment_checkout" >
+        <action
+            android:id="@+id/action_checkoutFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_buyerDashFragment"
+            app:destination="@id/buyerDashFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addCardFragment"
+            app:destination="@id/addCardFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addShippingDetailsFragment"
+            app:destination="@id/addShippingDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCardFragment"
+        android:name="com.example.shoppingcartfinal.AddCardFragment"
+        android:label="fragment_add_card"
+        tools:layout="@layout/fragment_add_card" >
+        <action
+            android:id="@+id/action_addCardFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addShippingDetailsFragment"
+        android:name="com.example.shoppingcartfinal.AddShippingDetailsFragment"
+        android:label="fragment_add_shipping_details"
+        tools:layout="@layout/fragment_add_shipping_details" >
+        <action
+            android:id="@+id/action_addShippingDetailsFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
     </fragment>
 </navigation>

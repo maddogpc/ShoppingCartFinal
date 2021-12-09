@@ -3,10 +3,17 @@ package com.example.shoppingcartfinal;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +30,9 @@ public class CheckoutFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    TextView textView, totalCost, existingCard, existingAddress;
+    Button addCard, addShippingDetails, proceed, back;
 
     public CheckoutFragment() {
         // Required empty public constructor
@@ -59,6 +69,73 @@ public class CheckoutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_checkout, container, false);
+        View view = inflater.inflate(R.layout.fragment_checkout, container, false);
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Pull objects from ViewModel
+        ConcreteViewModel concreteViewModel = ViewModelProviders.of(getActivity()).get(ConcreteViewModel.class);
+        ShoppingCartViewModel shoppingCartViewModel = ViewModelProviders.of(getActivity()).get(ShoppingCartViewModel.class);
+        User buyer = concreteViewModel.getUser();
+        ShoppingCart shoppingCart = shoppingCartViewModel.getShoppingCart();
+        Card card = (Card) buyer.getObject("Card");
+        ShippingDetails shippingDetails = (ShippingDetails) buyer.getObject("ShippingDetails");
+        if (card != null)
+        {
+            existingCard.setText("Existing card " + card.getCarNum());
+        }
+        else
+        {
+            existingCard.setText("No card available");
+        }
+        addCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.addCardFragment);
+            }
+        });
+        if (shippingDetails != null)
+        {
+            existingAddress.setText("Existing shipping details " + shippingDetails.getAddress());
+        }
+        else
+        {
+            existingAddress.setText("No address available");
+        }
+        addShippingDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.addShippingDetailsFragment);
+            }
+        });
+        proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (card == null || shippingDetails == null)
+                {
+                    Toast.makeText(getContext(), "Card and Shipping details are required before placing an order", Toast.LENGTH_SHORT);
+                }
+                else
+                {
+                    sendOrder(buyer, card, shippingDetails, shoppingCart.getProducts());
+                    Navigation.findNavController(view).navigate(R.id.buyerDashFragment);
+                }
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.shoppingCartFragment);
+            }
+        });
+
+    }
+    public void sendOrder(User buyer, Card card, ShippingDetails shippingDetails, ArrayList<Product> products) {
+        Order order = new Order(buyer.getName(), buyer.getEmail(), card, shippingDetails, products);
+        OrderDB orderDB = OrderDB.getInstance();
     }
 }

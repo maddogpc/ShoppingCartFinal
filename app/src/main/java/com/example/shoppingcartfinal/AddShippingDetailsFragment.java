@@ -27,7 +27,7 @@ public class AddShippingDetailsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    EditText sAddr, sCity, sReg, sNat;
+    EditText sAddr, sCity, sReg, sNat, sZIP;
     Button sConfirm, sCancel;
 
     public AddShippingDetailsFragment() {
@@ -65,7 +65,15 @@ public class AddShippingDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_shipping_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_shipping_details, container, false);
+        sAddr = (EditText) view.findViewById(R.id.addr);
+        sCity = (EditText) view.findViewById(R.id.city);
+        sReg = (EditText) view.findViewById(R.id.reg);
+        sNat = (EditText) view.findViewById(R.id.nat);
+        sZIP = (EditText) view.findViewById(R.id.zip);
+        sConfirm = (Button) view.findViewById(R.id.confirmAddr);
+        sCancel = (Button) view.findViewById(R.id.cancelAddr);
+        return view;
     }
     @Override
     public void onStart() {
@@ -74,21 +82,22 @@ public class AddShippingDetailsFragment extends Fragment {
         ConcreteViewModel buyerViewModel = ViewModelProviders.of(getActivity()).get(ConcreteViewModel.class);
         // Pull seller class from sellerViewModel
         User buyer = buyerViewModel.getUser();
-        String mySAddr, mySCity, mySReg, mySNat;
+        String mySAddr, mySCity, mySReg, mySNat, mySZIP;
         mySAddr = sAddr.getText().toString();
         mySCity = sCity.getText().toString();
         mySReg = sReg.getText().toString();
         mySNat = sNat.getText().toString();
+        mySZIP = sZIP.getText().toString();
         sConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addSD(mySAddr, mySCity, mySReg, mySNat, buyer);
+                addSD(mySAddr, mySCity, mySReg, mySNat, mySZIP, buyer);
             }
         });
 
     }
-    public void addSD(String addr, String city, String reg, String nat, User buyer) {
-        ShippingDetails shippingDetails = new ShippingDetails(addr, city, reg, nat);
+    public void addSD(String addr, String city, String reg, String nat, String ZIP, User buyer) {
+        ShippingDetails shippingDetails = new ShippingDetails(addr, city, reg, nat, Integer.parseInt(ZIP));
         buyer.addObject(shippingDetails);
     }
 }

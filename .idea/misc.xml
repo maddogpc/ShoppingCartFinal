@@ -5,12 +5,16 @@
       <map>
         <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/activity_main.xml" value="0.11018518518518519" />
         <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/activity_post_login_dashboard.xml" value="0.16799999999999998" />
+        <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_add_card.xml" value="0.25416666666666665" />
         <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_add_product.xml" value="0.2" />
         <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_add_product2.xml" value="0.176" />
+        <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_add_shipping_details.xml" value="0.25416666666666665" />
         <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_buyer_dash.xml" value="0.264" />
+        <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_checkout.xml" value="0.264" />
         <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_inventory.xml" value="0.264" />
+        <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_product_page.xml" value="0.25416666666666665" />
         <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_seller_dash.xml" value="0.264" />
-        <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_shopping_cart.xml" value="0.11005434782608696" />
+        <entry key="..\:/Documentos/FAU/COP4331/Project/ShoppingCartFinal/app/src/main/res/layout/fragment_shopping_cart.xml" value="0.2" />
         <entry key="..\:/Users/madis/AndroidStudioProjects/ShoppingCartFinal/app/src/main/res/layout/activity_main.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/madis/AndroidStudioProjects/ShoppingCartFinal/app/src/main/res/layout/activity_post_login_dashboard.xml" value="0.1" />
       </map>

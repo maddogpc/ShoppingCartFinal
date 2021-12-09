@@ -73,7 +73,6 @@ public class PostLoginDashboard extends AppCompatActivity {
             // Assign a new user object to existing currentUser object to update the user class upon reading Firebase data
             User finalCurrentUser = currentUser;
             ConcreteViewModel concreteViewModel = ViewModelProviders.of(this).get(ConcreteViewModel.class);
-            concreteViewModel.setUser(finalCurrentUser);
             // Read from the database
             user.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -100,6 +99,13 @@ public class PostLoginDashboard extends AppCompatActivity {
                                 concreteViewModel.setUser(currentUser2);
                                 System.out.println("d " + currentUser2.getSellerStatus());
                                 selectFragment(navGraph, navController, currentUser2);
+                            }
+                            else
+                            {
+                                ShoppingCart shoppingCart = ShoppingCart.getInstance();
+                                ShoppingCartViewModel shoppingCartViewModel = new ShoppingCartViewModel();
+                                shoppingCartViewModel.setShoppingCart(shoppingCart);
+                                concreteViewModel.setUser(finalCurrentUser);
                             }
                         }
                         catch (NullPointerException npe) {

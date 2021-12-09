@@ -4,15 +4,19 @@ import java.util.ArrayList;
 
 public class Buyer extends User {
     String name, email;
-    ArrayList<Card> cards;
-    ArrayList<ShippingDetails> sd;
+    //ArrayList<Card> cards;
+    //ArrayList<ShippingDetails> sd;
+    Card card;
+    ShippingDetails shippingDetails;
     int positionNo;
 
     public Buyer(String name, String email) {
         super(name, email);
         this.positionNo = 0;
-        this.cards = new ArrayList<>();
-        this.sd = new ArrayList<>();
+        this.card = null;
+        this.shippingDetails = null;
+        //this.card = new ArrayList<>();
+        //this.sd = new ArrayList<>();
     }
 
     @Override
@@ -24,11 +28,13 @@ public class Buyer extends User {
     public void insert(Object obj) {
         if (obj instanceof Card)
         {
-            this.cards.add((Card) obj);
+            //this.cards.add((Card) obj);
+            this.card = (Card) obj;
         }
         else if (obj instanceof ShippingDetails)
         {
-            this.sd.add((ShippingDetails) obj);
+            //this.sd.add((ShippingDetails) obj);
+            this.shippingDetails = (ShippingDetails) obj;
         }
         else
         {
@@ -39,13 +45,17 @@ public class Buyer extends User {
     @Override
     public Object locate(String desired) {
 
-        if (desired == "Cards" && !cards.isEmpty())
+        //if (desired == "Cards" && !cards.isEmpty())
+        if (desired == "Card" && card != null)
         {
-            return cards;
+            //return cards;
+            return card;
         }
-        else if (desired == "ShippingDetails" && !sd.isEmpty())
+        //else if (desired == "ShippingDetails" && !sd.isEmpty())
+        else if (desired == "ShippingDetails" && card != null)
         {
-            return sd;
+            //return sd;
+            return shippingDetails;
         }
         return null;
     }

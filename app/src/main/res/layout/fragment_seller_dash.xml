@@ -1,81 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress ALL -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SellerDashFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/dashboard"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="453dp"
-            android:orientation="horizontal">
+            android:layout_width="346dp"
+            android:layout_height="731dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <Space
-                android:layout_width="1px"
-                android:layout_height="37dp"
-                android:layout_weight="1" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dashboard"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="441dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="334dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="334dp" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/seller_summary" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/seller_summary" />
+            <TextView
+                android:id="@+id/totalRevenue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/total_revenue" />
 
-                <TextView
-                    android:id="@+id/totalRevenue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_revenue" />
+            <TextView
+                android:id="@+id/totalShippingCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/total_shipping_cost" />
 
-                <TextView
-                    android:id="@+id/totalShippingCost"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_shipping_cost" />
+            <TextView
+                android:id="@+id/totalProfit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/total_profit" />
 
-                <TextView
-                    android:id="@+id/totalProfit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_profit" />
-            </LinearLayout>
-
-            <Space
-                android:layout_width="1px"
-                android:layout_height="37dp"
-                android:layout_weight="1" />
+            <Button
+                android:id="@+id/toInventory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/inventory" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/toInventory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inventory" />
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

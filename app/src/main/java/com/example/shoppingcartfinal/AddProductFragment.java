@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.text.NoCopySpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +68,8 @@ public class AddProductFragment extends Fragment {
         pName = (EditText) view.findViewById(R.id.pname);
         pCost = (EditText) view.findViewById(R.id.pcost);
         pDesc = (EditText) view.findViewById(R.id.pdesc);
+        pConfirm = (Button) view.findViewById(R.id.confirmProduct);
+        pConfirm = (Button) view.findViewById(R.id.cancelProduct);
         return view;
     }
     @Override
@@ -96,6 +97,8 @@ public class AddProductFragment extends Fragment {
                 .setProductCost(Double.parseDouble(cost))
                 .setProductDesc(desc)
                 .setProductSeller(sname);
+        ProductDB productDB = ProductDB.getInstance();
         Product currentProduct = new Product(productBuilder);
+        //productDB.
     }
 }

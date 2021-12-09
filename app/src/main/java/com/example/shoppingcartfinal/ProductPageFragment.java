@@ -3,20 +3,21 @@ package com.example.shoppingcartfinal;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BuyerDashFragment#newInstance} factory method to
+ * Use the {@link ProductPageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BuyerDashFragment extends Fragment {
+public class ProductPageFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,10 +28,10 @@ public class BuyerDashFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    Button toShoppingCart;
-    RecyclerView dashRV;
+    TextView productName, productCost, productDesc, productProvider;
+    Button addToCart, cancel;
 
-    public BuyerDashFragment() {
+    public ProductPageFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +41,11 @@ public class BuyerDashFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BuyerDashFragment.
+     * @return A new instance of fragment ProductPageFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BuyerDashFragment newInstance(String param1, String param2) {
-        BuyerDashFragment fragment = new BuyerDashFragment();
+    public static ProductPageFragment newInstance(String param1, String param2) {
+        ProductPageFragment fragment = new ProductPageFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,11 +66,7 @@ public class BuyerDashFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_buyer_dash, container, false);
-        // Get ViewModel
-        // To Shopping Cart button
-        toShoppingCart = (Button) view.findViewById(R.id.toShoppingCart);
-        dashRV = (RecyclerView) view.findViewById(R.id.drv);
+        View view = inflater.inflate(R.layout.fragment_product_page, container, false);
 
         return view;
     }
@@ -77,11 +74,28 @@ public class BuyerDashFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        toShoppingCart.setOnClickListener(new View.OnClickListener() {
+        // Pull product details and shopping cart from their respective View Models
+        ProductViewModel productViewModel = ViewModelProviders.of(getActivity()).get(ProductViewModel.class);
+        ShoppingCartViewModel shoppingCartViewModel = ViewModelProviders.of(getActivity()).get(ShoppingCartViewModel.class);
+        Product product = productViewModel.getProduct();
+        ShoppingCart shoppingCart = shoppingCartViewModel.getShoppingCart();
+        // Set text of product details
+        productName.setText(product.getName());
+        productCost.setText(Double.toString(product.getCost()));
+        productDesc.setText(product.getDescription());
+        productProvider.setText(product.getSeller());
+        // Click listener to add product to shopping cart
+        addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.shoppingCartFragment);
+                shoppingCart.addToShoppingCart(product);
+                Navigation.findNavController(view).navigate(R.id.buyerDashFragment);
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.buyerDashFragment);
             }
         });
     }

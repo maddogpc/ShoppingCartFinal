@@ -66,7 +66,11 @@ public class AddCardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_card, container, false);
-        //cNum = (EditText) view.findViewById();
+        cNum = (EditText) view.findViewById(R.id.cnum);
+        cExp = (EditText) view.findViewById(R.id.cexp);
+        cPin = (EditText) view.findViewById(R.id.cnum);
+        cConfirm = (Button) view.findViewById(R.id.confirmCard);
+        cCancel = (Button) view.findViewById(R.id.cancelCard);
         return view;
     }
     @Override

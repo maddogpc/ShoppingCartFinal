@@ -6,15 +6,52 @@
     tools:context=".ShoppingCartFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/toBDash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dashboard" />
+        <Space
+            android:layout_width="76dp"
+            android:layout_height="32dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="333dp"
+                android:layout_height="30dp"
+                android:text="@string/shopping_cart_viewer"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/scrv"
+                android:layout_width="327dp"
+                android:layout_height="475dp" />
+
+            <Button
+                android:id="@+id/toBDash"
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:text="@string/dashboard" />
+
+            <Button
+                android:id="@+id/toCO"
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:text="@string/to_checkout" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 </FrameLayout>

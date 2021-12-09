@@ -6,6 +6,18 @@ public class Product implements java.io.Serializable {
     String description;
     String seller;
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
     public double getCost() {
         return cost;
     }
