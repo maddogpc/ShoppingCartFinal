@@ -1,18 +1,14 @@
 package com.example.shoppingcartfinal;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
-import androidx.navigation.NavHost;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-
-import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,6 +24,12 @@ public class PostLoginDashboard extends AppCompatActivity {
     ShoppingCartFragment scf;
     SellerDashFragment sdf;
     InventoryFragment inf;
+    AddProductFragment apf;
+    AddCardFragment acf;
+    AddShippingDetailsFragment asdf;
+    CheckoutFragment chf;
+    ProductPageFragment ppf;
+    ConfirmOrderFragment cof;
 
     String user_name_g = "";
     String user_email_g = "";
@@ -132,6 +134,12 @@ public class PostLoginDashboard extends AppCompatActivity {
         scf = new ShoppingCartFragment();
         sdf = new SellerDashFragment();
         inf = new InventoryFragment();
+        apf = new AddProductFragment();
+        acf = new AddCardFragment();
+        asdf = new AddShippingDetailsFragment();
+        chf = new CheckoutFragment();
+        ppf = new ProductPageFragment();
+        cof = new ConfirmOrderFragment();
     }
     public void selectFragment(NavGraph navGraph, NavController navController, User user) {
         Fragment index;

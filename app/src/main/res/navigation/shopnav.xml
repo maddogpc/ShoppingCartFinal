@@ -73,6 +73,9 @@
         <action
             android:id="@+id/action_checkoutFragment_to_addShippingDetailsFragment"
             app:destination="@id/addShippingDetailsFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_confirmOrderFragment"
+            app:destination="@id/confirmOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/addCardFragment"
@@ -91,5 +94,17 @@
         <action
             android:id="@+id/action_addShippingDetailsFragment_to_checkoutFragment"
             app:destination="@id/checkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmOrderFragment"
+        android:name="com.example.shoppingcartfinal.ConfirmOrderFragment"
+        android:label="fragment_confirm_order"
+        tools:layout="@layout/fragment_confirm_order" >
+        <action
+            android:id="@+id/action_confirmOrderFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+        <action
+            android:id="@+id/action_confirmOrderFragment_to_buyerDashFragment"
+            app:destination="@id/buyerDashFragment" />
     </fragment>
 </navigation>

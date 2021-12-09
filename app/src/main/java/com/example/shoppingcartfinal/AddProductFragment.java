@@ -1,15 +1,14 @@
 package com.example.shoppingcartfinal;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,7 +63,7 @@ public class AddProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_product2, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_product, container, false);
         pName = (EditText) view.findViewById(R.id.pname);
         pCost = (EditText) view.findViewById(R.id.pcost);
         pDesc = (EditText) view.findViewById(R.id.pdesc);
@@ -76,7 +75,7 @@ public class AddProductFragment extends Fragment {
     public void onStart() {
         super.onStart();
         // Get ViewModel
-        ConcreteViewModel sellerViewModel = ViewModelProviders.of(getActivity()).get(ConcreteViewModel.class);
+        ConcreteViewModel sellerViewModel = ViewModelProviders.of(requireActivity()).get(ConcreteViewModel.class);
         // Pull seller class from sellerViewModel
         User seller = sellerViewModel.getUser();
         String myPName, myPCost, myPDesc;
@@ -97,8 +96,10 @@ public class AddProductFragment extends Fragment {
                 .setProductCost(Double.parseDouble(cost))
                 .setProductDesc(desc)
                 .setProductSeller(sname);
-        ProductDB productDB = ProductDB.getInstance();
+        ProductDB productDB = new ProductDB(getContext());
         Product currentProduct = new Product(productBuilder);
+        productDB.addProduct(currentProduct);
+        productDB.saveDB(false);
         //productDB.
     }
 }

@@ -70,7 +70,14 @@ public class CheckoutFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_checkout, container, false);
-
+        // Inflate the text views
+        existingCard = (TextView) view.findViewById(R.id.existingCard);
+        existingAddress = (TextView) view.findViewById(R.id.existingSD);
+        // Inflate the buttons
+        addCard = (Button) view.findViewById(R.id.addCard);
+        addShippingDetails = (Button) view.findViewById(R.id.addSD);
+        proceed = (Button) view.findViewById(R.id.proceed);
+        back = (Button) view.findViewById(R.id.back);
         return view;
     }
 
@@ -121,8 +128,8 @@ public class CheckoutFragment extends Fragment {
                 }
                 else
                 {
-                    sendOrder(buyer, card, shippingDetails, shoppingCart.getProducts());
-                    Navigation.findNavController(view).navigate(R.id.buyerDashFragment);
+                    createOrder(buyer, card, shippingDetails, shoppingCart.getProducts());
+                    Navigation.findNavController(view).navigate(R.id.confirmOrderFragment);
                 }
             }
         });
@@ -134,8 +141,9 @@ public class CheckoutFragment extends Fragment {
         });
 
     }
-    public void sendOrder(User buyer, Card card, ShippingDetails shippingDetails, ArrayList<Product> products) {
+    public void createOrder(User buyer, Card card, ShippingDetails shippingDetails, ArrayList<Product> products) {
+        OrderViewModel orderViewModel = ViewModelProviders.of(getActivity()).get(OrderViewModel.class);
         Order order = new Order(buyer.getName(), buyer.getEmail(), card, shippingDetails, products);
-        OrderDB orderDB = OrderDB.getInstance();
+        orderViewModel.setOrder(order);
     }
 }

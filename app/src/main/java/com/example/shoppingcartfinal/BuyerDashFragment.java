@@ -1,15 +1,20 @@
 package com.example.shoppingcartfinal;
 
+import android.location.GnssAntennaInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +34,7 @@ public class BuyerDashFragment extends Fragment {
 
     Button toShoppingCart;
     RecyclerView dashRV;
+    View.OnClickListener onClickListener;
 
     public BuyerDashFragment() {
         // Required empty public constructor
@@ -77,6 +83,12 @@ public class BuyerDashFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        ProductDB productDB = new ProductDB(getContext());
+        ProductViewModel productViewModel = ViewModelProviders.of(requireActivity()).get(ProductViewModel.class);
+
+        ProductAdapter productAdapter = new ProductAdapter(productDB.getProducts(), productViewModel);
+
 
         toShoppingCart.setOnClickListener(new View.OnClickListener() {
             @Override

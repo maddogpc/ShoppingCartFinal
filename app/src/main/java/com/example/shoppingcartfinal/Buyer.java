@@ -1,7 +1,9 @@
 package com.example.shoppingcartfinal;
 
-import java.util.ArrayList;
-
+/**
+ * This class is a concrete instance of the User abstract class
+ * @author Franco Carbajal-Cossi, Madison Verger, Jaylen Robinson
+ */
 public class Buyer extends User {
     String name, email;
     //ArrayList<Card> cards;
@@ -10,6 +12,11 @@ public class Buyer extends User {
     ShippingDetails shippingDetails;
     int positionNo;
 
+    /**
+     * Constructor
+     * @param name of the buyer
+     * @param email of the buyer
+     */
     public Buyer(String name, String email) {
         super(name, email);
         this.positionNo = 0;
@@ -24,6 +31,12 @@ public class Buyer extends User {
         System.out.println("test");
     }
 
+    /**
+     * Overridable method called by User template method addObject for inserting objects into an attribute depending of the concrete class used
+     * @param obj Random object
+     * @precondition The object is either an instance of Card or ShippingDetails classes
+     * @postcondition The object is assigned to either the card or shipping details attribute of the Buyer class
+     */
     @Override
     public void insert(Object obj) {
         if (obj instanceof Card)
@@ -42,6 +55,11 @@ public class Buyer extends User {
         }
     }
 
+    /**
+     * Find an object based on the string with the name of the class
+     * @param desired is either 'Card' or 'ShippingDetails'
+     * @return the object as an instance of the class specified by the string
+     */
     @Override
     public Object locate(String desired) {
 
@@ -60,6 +78,11 @@ public class Buyer extends User {
         return null;
     }
 
+    /**
+     * Overridable method called by User template setStatus to change the position of the buyer object, which will be replaced by the seller object
+     * @param pos Desired position (true for seller status - false for buyer status)
+     * @return a binary digit (1 for seller, 0 for buyer)
+     */
     @Override
     public int promote(boolean pos) {
         if (pos == true)

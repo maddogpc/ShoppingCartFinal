@@ -13,8 +13,8 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="375dp"
-            android:layout_height="690dp"
+            android:layout_width="361dp"
+            android:layout_height="555dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,6 +52,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_shipping_details" />
+
+            <Button
+                android:id="@+id/proceed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/proceed" />
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/back" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

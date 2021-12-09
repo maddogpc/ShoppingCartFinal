@@ -51,6 +51,15 @@
                             <option name="y" value="-145" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_addCardFragment_to_checkoutFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -62,6 +71,15 @@
                             <option name="x" value="870" />
                             <option name="y" value="157" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_addShippingDetailsFragment_to_checkoutFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -108,12 +126,43 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_checkoutFragment_to_addShippingDetailsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_checkoutFragment_to_buyerDashFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_checkoutFragment_to_confirmOrderFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_checkoutFragment_to_shoppingCartFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="confirmOrderFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="534" />
+                            <option name="y" value="-386" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_confirmOrderFragment_to_checkoutFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

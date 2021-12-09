@@ -3,10 +3,15 @@ package com.example.shoppingcartfinal;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +28,9 @@ public class ConfirmOrderFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button confirmOrder, cancelOrder;
+    TextView buyerName, cardNumber, address, city_region_country, zipCode, totalSpend;
 
     public ConfirmOrderFragment() {
         // Required empty public constructor
@@ -60,6 +68,45 @@ public class ConfirmOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_confirm_order, container, false);
+        // Inflate the text views
+        buyerName = (TextView) view.findViewById(R.id.buyerName);
+        cardNumber = (TextView) view.findViewById(R.id.cardNumber);
+        address = (TextView) view.findViewById(R.id.address);
+        city_region_country = (TextView) view.findViewById(R.id.city_reg_nat);
+        zipCode = (TextView) view.findViewById(R.id.zipCode);
+        totalSpend = (TextView) view.findViewById(R.id.totalCost);
+        // Inflate the buttons
+        confirmOrder = (Button) view.findViewById(R.id.confirmOrder);
+        cancelOrder = (Button) view.findViewById(R.id.cancelOrder);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        OrderViewModel orderViewModel = ViewModelProviders.of(getActivity()).get(OrderViewModel.class);
+        Order order = orderViewModel.getOrder();
+        if (order != null)
+        {
+            buyerName.setText("Orderer: " + order.getBuyerName() + "(" + order.getBuyerEmail() + ")");
+            cardNumber.setText("Card: " + order.getCardInfo().getCarNum());
+            address.setText("Address: " + order.getShippingDetails().getAddress());
+            city_region_country.setText(order.getShippingDetails().getCity() + " " + order.getShippingDetails().getRegion() + " " + order.getShippingDetails().getCountry());
+            zipCode.setText(order.getShippingDetails().getZip());
+            totalSpend.setText(Double.toString(order.getTotalCost()));
+            confirmOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    OrderDB orderDB = OrderDB.getInstance();
+                    Navigation.findNavController(view).navigate(R.id.buyerDashFragment);
+                }
+            });
+            cancelOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Navigation.findNavController(view).navigate(R.id.checkoutFragment);
+                }
+            });
+        }
     }
 }
