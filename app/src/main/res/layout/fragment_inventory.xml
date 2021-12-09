@@ -28,6 +28,7 @@
                 android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/invR"
                 android:layout_width="335dp"
                 android:layout_height="288dp" />
 

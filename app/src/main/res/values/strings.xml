@@ -25,7 +25,6 @@
     <string name="cost">Cost</string>
     <string name="description">Description</string>
     <string name="confirm">Confirm</string>
-    <string name="cancel">Cancel</string>
     <string name="pin">PIN</string>
     <string name="expiration_mm_yy">Expiration MM/YY</string>
     <string name="card_number">Card Number</string>
@@ -46,9 +45,14 @@
     <string name="confirm_order">Confirm Order</string>
     <string name="total_cost">Total Cost</string>
     <string name="cancel_order">Cancel Order</string>
-    <string name="confirm_order">Confirm Order</string>
     <string name="buyer_name">Buyer Name</string>
     <string name="product_name">Product Name</string>
     <string name="product_cost">Product Cost</string>
     <string name="view">view</string>
+    <string name="product_description">Product Description</string>
+    <string name="sold_by">Sold By</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="cancel">Cancel</string>
+    <string name="x">X</string>
+    <string name="del">Del</string>
 </resources>

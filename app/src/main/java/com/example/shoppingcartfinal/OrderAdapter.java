@@ -3,7 +3,6 @@ package com.example.shoppingcartfinal;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,12 +21,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView pName, pCost;
-        private Button viewProduct;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            pName = (TextView) itemView.findViewById(R.id.productName);
-            pCost = (TextView) itemView.findViewById(R.id.productCost);
-            viewProduct = (Button) itemView.findViewById(R.id.viewProduct);
+            pName = (TextView) itemView.findViewById(R.id.orderProductName);
+            pCost = (TextView) itemView.findViewById(R.id.orderProductCost);
         }
     }
 

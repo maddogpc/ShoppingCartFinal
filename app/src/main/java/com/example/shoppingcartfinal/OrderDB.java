@@ -148,4 +148,22 @@ public class OrderDB {
         return list;
         // raise exception if not found
     }
+
+    /**
+     * Filters orders by the seller's email
+     * @param sObj intended seller
+     * @return filtered list
+     */
+    public ArrayList<Order> getProductsFromOrderBySeller(User sObj) {
+        ArrayList<Order> list = new ArrayList<>();
+        //ArrayList<Product> plist = new ArrayList<>();
+        if (sObj instanceof Seller) {
+            for (Order order : orders) {
+                ArrayList<Product> plist = order.getProductsBySellerName(sObj);
+                list.add(new Order(order.getBuyerName(), order.getBuyerEmail(), order.getCardInfo(), order.getShippingDetails(), plist));
+            }
+        }
+        return list;
+        // raise exception if not found
+    }
 }

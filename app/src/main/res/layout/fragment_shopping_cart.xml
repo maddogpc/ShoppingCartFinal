@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ShoppingCartFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="76dp"
-            android:layout_height="32dp"
-            android:layout_weight="1" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:layout_width="333dp"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:text="@string/shopping_cart_viewer"
                 android:textAlignment="center"
@@ -30,28 +33,22 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/scrv"
-                android:layout_width="327dp"
+                android:layout_width="match_parent"
                 android:layout_height="475dp" />
 
             <Button
                 android:id="@+id/toBDash"
-                android:layout_width="321dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dashboard" />
 
             <Button
                 android:id="@+id/toCO"
-                android:layout_width="321dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/to_checkout" />
 
         </LinearLayout>
-
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

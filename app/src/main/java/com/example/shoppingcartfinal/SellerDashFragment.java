@@ -1,17 +1,17 @@
 package com.example.shoppingcartfinal;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +31,7 @@ public class SellerDashFragment extends Fragment {
 
     Button toInventory;
     TextView totalRev, totalSC, totalProf;
+    RecyclerView orderList;
 
     public SellerDashFragment() {
         // Required empty public constructor
@@ -75,6 +76,8 @@ public class SellerDashFragment extends Fragment {
         totalSC = (TextView) view.findViewById(R.id.totalShippingCost);
         totalProf = (TextView) view.findViewById(R.id.totalProfit);
 
+        orderList = (RecyclerView) view.findViewById(R.id.sRV);
+
         return view;
     }
     @Override
@@ -82,8 +85,16 @@ public class SellerDashFragment extends Fragment {
         super.onStart();
         // Get ViewModel
         ConcreteViewModel sellerViewModel = ViewModelProviders.of(getActivity()).get(ConcreteViewModel.class);
-        // Pull seller class from sellerViewModel
         User seller = sellerViewModel.getUser();
+
+        // Pull seller class from sellerViewModel
+        OrderDB orderDB = OrderDB.getInstance(getContext());
+
+        ReceiveOrderAdapter receiveOrderAdapter = new ReceiveOrderAdapter(orderDB, seller);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        orderList.setLayoutManager(layoutManager);
+        orderList.setAdapter(receiveOrderAdapter);
+
         System.out.println("seller " + seller.getEmail());
         toInventory.setOnClickListener(new View.OnClickListener() {
             @Override

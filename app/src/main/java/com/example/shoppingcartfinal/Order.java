@@ -53,6 +53,24 @@ public class Order implements java.io.Serializable {
         return products;
     }
 
+    /**
+     * Gets all products by a particular seller
+     * @param seller
+     * @return List of products sharing one seller
+     */
+    public ArrayList<Product> getProductsBySellerName(User seller) {
+        ArrayList<Product> products = new ArrayList<>();
+        if (seller instanceof Seller) {
+            for (Product product : getProducts()) {
+                if (product.getSeller() == seller.getName()) {
+                    products.add(product);
+                }
+            }
+            return products;
+        }
+        return null;
+    }
+
     public double getTotalCost() {
         return totalCost;
     }

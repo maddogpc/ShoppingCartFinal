@@ -1,16 +1,15 @@
 package com.example.shoppingcartfinal;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,7 +66,12 @@ public class ProductPageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_product_page, container, false);
-
+        productName = (TextView) view.findViewById(R.id.thisProductName);
+        productCost = (TextView) view.findViewById(R.id.thisProductCost);
+        productDesc = (TextView) view.findViewById(R.id.thisProductDesc);
+        productProvider = (TextView) view.findViewById(R.id.productSellerName);
+        addToCart = (Button) view.findViewById(R.id.addProductToCart);
+        cancel = (Button) view.findViewById(R.id.cancelAdd);
         return view;
     }
 

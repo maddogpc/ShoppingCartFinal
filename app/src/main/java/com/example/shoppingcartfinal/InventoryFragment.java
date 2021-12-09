@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +27,7 @@ public class InventoryFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    RecyclerView inventory;
     Button toSDash, addProduct;
 
     public InventoryFragment() {
@@ -63,6 +66,7 @@ public class InventoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_inventory, container, false);
+        inventory = (RecyclerView) view.findViewById(R.id.invR);
         // Get ViewModel
         // To Shopping Cart button
         toSDash = (Button) view.findViewById(R.id.toSDash);
@@ -73,6 +77,13 @@ public class InventoryFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        ProductDB products = ProductDB.getInstance(getContext());
+
+        InventoryAdapter inventoryAdapter = new InventoryAdapter(products.getProducts());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        inventory.setLayoutManager(layoutManager);
+        inventory.setAdapter(inventoryAdapter);
 
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,17 +1,16 @@
 package com.example.shoppingcartfinal;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,6 +80,11 @@ public class ShoppingCartFragment extends Fragment {
 
         ShoppingCartViewModel shoppingCartViewModel = ViewModelProviders.of(getActivity()).get(ShoppingCartViewModel.class);
         ShoppingCart shoppingCart = shoppingCartViewModel.getShoppingCart();
+
+        ShoppingCartAdapter shoppingCartAdapter = new ShoppingCartAdapter(shoppingCart);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        shoppingCartRV.setLayoutManager(layoutManager);
+        shoppingCartRV.setAdapter(shoppingCartAdapter);
 
         toBDash.setOnClickListener(new View.OnClickListener() {
             @Override
