@@ -1,15 +1,15 @@
 package com.example.shoppingcartfinal;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,10 +92,17 @@ public class AddShippingDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 addSD(mySAddr, mySCity, mySReg, mySNat, mySZIP, buyer);
+                Navigation.findNavController(view).navigate(R.id.checkoutFragment);
             }
         });
-
+        sCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.checkoutFragment);
+            }
+        });
     }
+
     public void addSD(String addr, String city, String reg, String nat, String ZIP, User buyer) {
         ShippingDetails shippingDetails = new ShippingDetails(addr, city, reg, nat, Integer.parseInt(ZIP));
         buyer.addObject(shippingDetails);

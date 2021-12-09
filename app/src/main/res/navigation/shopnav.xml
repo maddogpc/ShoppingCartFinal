@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_inventoryFragment_to_sellerDashFragment"
             app:destination="@id/sellerDashFragment" />
+        <action
+            android:id="@+id/action_inventoryFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
     </fragment>
     <fragment
         android:id="@+id/productPageFragment"
@@ -106,5 +109,14 @@
         <action
             android:id="@+id/action_confirmOrderFragment_to_buyerDashFragment"
             app:destination="@id/buyerDashFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.example.shoppingcartfinal.AddProductFragment"
+        android:label="fragment_add_product"
+        tools:layout="@layout/fragment_add_product" >
+        <action
+            android:id="@+id/action_addProductFragment_to_inventoryFragment"
+            app:destination="@id/inventoryFragment" />
     </fragment>
 </navigation>

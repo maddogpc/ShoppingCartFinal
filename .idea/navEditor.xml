@@ -63,6 +63,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="addProductFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="521" />
+                            <option name="y" value="366" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="addShippingDetailsFragment">
                     <value>
                       <LayoutPositions>
@@ -162,6 +174,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_confirmOrderFragment_to_buyerDashFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_confirmOrderFragment_to_checkoutFragment">
                               <value>
                                 <LayoutPositions />

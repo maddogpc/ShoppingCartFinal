@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,6 +88,13 @@ public class AddCardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 addCard(myCNum, myExp, myPin, buyer);
+                Navigation.findNavController(view).navigate(R.id.checkoutFragment);
+            }
+        });
+        cCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.checkoutFragment);
             }
         });
 

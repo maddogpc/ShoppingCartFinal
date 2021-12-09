@@ -59,6 +59,7 @@
                 android:text="@string/zip" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/orderList"
                 android:layout_width="match_parent"
                 android:layout_height="281dp">
 

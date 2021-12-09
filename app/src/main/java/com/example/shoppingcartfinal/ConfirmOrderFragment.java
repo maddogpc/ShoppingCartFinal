@@ -1,17 +1,17 @@
 package com.example.shoppingcartfinal;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +29,7 @@ public class ConfirmOrderFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    RecyclerView orderedList;
     Button confirmOrder, cancelOrder;
     TextView buyerName, cardNumber, address, city_region_country, zipCode, totalSpend;
 
@@ -78,6 +79,8 @@ public class ConfirmOrderFragment extends Fragment {
         // Inflate the buttons
         confirmOrder = (Button) view.findViewById(R.id.confirmOrder);
         cancelOrder = (Button) view.findViewById(R.id.cancelOrder);
+        // Inflate the RecyclerView
+        orderedList = (RecyclerView) view.findViewById(R.id.orderList);
         return view;
     }
 
@@ -93,11 +96,20 @@ public class ConfirmOrderFragment extends Fragment {
             address.setText("Address: " + order.getShippingDetails().getAddress());
             city_region_country.setText(order.getShippingDetails().getCity() + " " + order.getShippingDetails().getRegion() + " " + order.getShippingDetails().getCountry());
             zipCode.setText(order.getShippingDetails().getZip());
-            totalSpend.setText(Double.toString(order.getTotalCost()));
+
+            // Initializes the RecyclerView list
+            OrderAdapter orderAdapter = new OrderAdapter(order.getProducts());
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+            orderedList.setLayoutManager(layoutManager);
+            orderedList.setAdapter(orderAdapter);
+
+            totalSpend.setText(Double.toString(order.getTotalCostCost()));
             confirmOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    OrderDB orderDB = OrderDB.getInstance();
+                    OrderDB orderDB = OrderDB.getInstance(getContext());
+                    orderDB.addOrder(order);
+                    orderDB.saveDB(false);
                     Navigation.findNavController(view).navigate(R.id.buyerDashFragment);
                 }
             });
