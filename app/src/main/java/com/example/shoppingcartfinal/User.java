@@ -22,6 +22,8 @@ public abstract class User {
 
     public boolean getSellerStatus() { return isSeller; }
 
+    public abstract void insert(Object obj);
+    public abstract Object locate(String desired);
     public abstract int promote(boolean pos);
     public abstract void addAttributes();
 
@@ -35,6 +37,14 @@ public abstract class User {
         {
             isSeller = true;
         }
+    }
+
+    public void addObject(Object obj) {
+        insert(obj);
+    }
+
+    public Object getObject(String desired) {
+        return locate(desired);
     }
 
     User(String name, String email)

@@ -3,6 +3,13 @@ package com.example.shoppingcartfinal;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
+import androidx.navigation.NavHost;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +41,12 @@ public class PostLoginDashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_login_dashboard);
 
+        // Instantiate current user as buyer by default
         final User currentUser = new Buyer(user_name_g, user_email_g);
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView2);
+        NavController navController = navHostFragment.getNavController();
+        NavGraph navGraph = navController.getNavInflater().inflate(R.navigation.shopnav);
 
         // Ensures that the user is signed in
         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this );
@@ -60,7 +72,8 @@ public class PostLoginDashboard extends AppCompatActivity {
             System.out.println("Will call avel");
             // Assign a new user object to existing currentUser object to update the user class upon reading Firebase data
             User finalCurrentUser = currentUser;
-            ConcreteViewModel concreteViewModel = new ConcreteViewModel(finalCurrentUser);
+            ConcreteViewModel concreteViewModel = ViewModelProviders.of(this).get(ConcreteViewModel.class);
+            concreteViewModel.setUser(finalCurrentUser);
             // Read from the database
             user.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -86,7 +99,7 @@ public class PostLoginDashboard extends AppCompatActivity {
                                 System.out.println("changed status");
                                 concreteViewModel.setUser(currentUser2);
                                 System.out.println("d " + currentUser2.getSellerStatus());
-                                selectFragment(currentUser2);
+                                selectFragment(navGraph, navController, currentUser2);
                             }
                         }
                         catch (NullPointerException npe) {
@@ -114,19 +127,22 @@ public class PostLoginDashboard extends AppCompatActivity {
         sdf = new SellerDashFragment();
         inf = new InventoryFragment();
     }
-    public void selectFragment(User user) {
+    public void selectFragment(NavGraph navGraph, NavController navController, User user) {
         Fragment index;
         if (user.getSellerStatus() == false)
         {
             System.out.println("Set to Buyer Fragment");
-            index = bdf;
+            //index = bdf;
+            navGraph.setStartDestination(R.id.buyerDashFragment);
         }
         else
         {
             System.out.println("Set to Seller Fragment");
-            index = sdf;
+            //index = sdf;
+            navGraph.setStartDestination(R.id.sellerDashFragment);
         }
         System.out.println("dd");
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView2, index).commit();
+        navController.setGraph(navGraph);
+        //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView2, index).commit();
     }
 }

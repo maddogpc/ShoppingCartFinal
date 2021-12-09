@@ -1,4 +1,4 @@
-package com.company;
+package com.example.shoppingcartfinal;
 
 public class Product implements java.io.Serializable {
     String name;
@@ -10,10 +10,10 @@ public class Product implements java.io.Serializable {
         return cost;
     }
 
-    public Product(String name, double cost, String description, String seller) {
-        this.name = name;
-        this.cost = cost;
-        this.description = description;
-        this.seller = seller;
+    public Product(ConcreteProductBuilder builder) {
+        this.name = builder.name;
+        this.cost = builder.cost;
+        this.description = builder.desc;
+        this.seller = builder.sname;
     }
 }

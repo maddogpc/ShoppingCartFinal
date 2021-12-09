@@ -1,5 +1,7 @@
 package com.example.shoppingcartfinal;
 
+import static com.example.shoppingcartfinal.R.id.sellerDashFragment;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,7 +28,7 @@ public class InventoryFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    Button toSDash;
+    Button toSDash, addProduct;
 
     public InventoryFragment() {
         // Required empty public constructor
@@ -68,12 +70,25 @@ public class InventoryFragment extends Fragment {
         // To Shopping Cart button
         toSDash = (Button) view.findViewById(R.id.toSDash);
 
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        addProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         toSDash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.sellerDashFragment);
             }
         });
-        return view;
     }
 }

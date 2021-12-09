@@ -5,4 +5,11 @@ public class Card {
     String expDate;
     String pin;
     String cardHolder;
+
+    public Card(String num, String exp, String pin, String bname) {
+        this.carNum = num;
+        this.expDate = exp;
+        this.pin = pin;
+        this.cardHolder = bname;
+    }
 }

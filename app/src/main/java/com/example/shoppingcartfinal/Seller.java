@@ -18,6 +18,16 @@ public class Seller extends User {
     }
 
     @Override
+    public void insert(Object obj) {
+
+    }
+
+    @Override
+    public Object locate(String desired) {
+        return null;
+    }
+
+    @Override
     public int promote(boolean pos) {
         if (pos == true)
         {

@@ -3,9 +3,9 @@ package com.example.shoppingcartfinal;
 import androidx.lifecycle.ViewModel;
 
 public class ConcreteViewModel extends ViewModel {
-    private User user;
-    public ConcreteViewModel(User user) {
-        this.user = user;
+    public User user;
+    public ConcreteViewModel() {
+
     }
 
     public User getUser() {

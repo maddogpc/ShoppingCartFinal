@@ -3,12 +3,15 @@ package com.example.shoppingcartfinal;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +30,7 @@ public class SellerDashFragment extends Fragment {
     private String mParam2;
 
     Button toInventory;
+    TextView totalRev, totalSC, totalProf;
 
     public SellerDashFragment() {
         // Required empty public constructor
@@ -64,16 +68,28 @@ public class SellerDashFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_seller_dash, container, false);
-        // Get ViewModel
-        // To Shopping Cart button
+        // Initialize To Inventory button
         toInventory = (Button) view.findViewById(R.id.toInventory);
+        // Initialize Text views
+        totalRev = (TextView) view.findViewById(R.id.totalRevenue);
+        totalSC = (TextView) view.findViewById(R.id.totalShippingCost);
+        totalProf = (TextView) view.findViewById(R.id.totalProfit);
 
+        return view;
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Get ViewModel
+        ConcreteViewModel sellerViewModel = ViewModelProviders.of(getActivity()).get(ConcreteViewModel.class);
+        // Pull seller class from sellerViewModel
+        User seller = sellerViewModel.getUser();
+        System.out.println("seller " + seller.getEmail());
         toInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.inventoryFragment);
             }
         });
-        return view;
     }
 }
