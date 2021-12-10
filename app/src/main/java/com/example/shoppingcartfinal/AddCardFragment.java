@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -77,18 +78,25 @@ public class AddCardFragment extends Fragment {
     public void onStart() {
         super.onStart();
         // Get ViewModel
-        ConcreteViewModel buyerViewModel = ViewModelProviders.of(requireActivity()).get(ConcreteViewModel.class);
+        ConcreteViewModel buyerViewModel = ViewModelProviders.of(getActivity()).get(ConcreteViewModel.class);
         // Pull seller class from sellerViewModel
         User buyer = buyerViewModel.getUser();
-        String myCNum, myExp, myPin, myCH;
-        myCNum = cNum.getText().toString();
-        myExp = cExp.getText().toString();
-        myPin = cPin.getText().toString();
+        System.out.println(buyer.getName());
         cConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addCard(myCNum, myExp, myPin, buyer);
-                Navigation.findNavController(view).navigate(R.id.checkoutFragment);
+                try {
+                    final String myCNum = cNum.getText().toString();
+                    final String myCExp = cExp.getText().toString();
+                    final String myPin = cPin.getText().toString();
+                    System.out.println(myCNum);
+                    addCard(myCNum, myCExp, myPin, buyer);
+                    Navigation.findNavController(view).navigate(R.id.checkoutFragment);
+                } catch (NullPointerException n) {
+                    n.printStackTrace();
+                    Toast.makeText(getContext(), "No input on either field", Toast.LENGTH_SHORT);
+                }
+
             }
         });
         cCancel.setOnClickListener(new View.OnClickListener() {

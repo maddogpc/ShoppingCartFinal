@@ -79,7 +79,9 @@ public class ShoppingCartFragment extends Fragment {
         super.onStart();
 
         ShoppingCartViewModel shoppingCartViewModel = ViewModelProviders.of(getActivity()).get(ShoppingCartViewModel.class);
-        ShoppingCart shoppingCart = shoppingCartViewModel.getShoppingCart();
+        ShoppingCart shoppingCart = ShoppingCart.getInstance();
+        System.out.println("ddf");
+        System.out.println(" f " + shoppingCart);
 
         ShoppingCartAdapter shoppingCartAdapter = new ShoppingCartAdapter(shoppingCart);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());

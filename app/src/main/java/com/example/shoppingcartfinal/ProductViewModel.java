@@ -12,7 +12,7 @@ public class ProductViewModel extends ViewModel {
     /**
      * Empty constructor
      */
-    ProductViewModel() {
+    public ProductViewModel() {
 
     }
 

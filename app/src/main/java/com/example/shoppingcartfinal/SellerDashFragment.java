@@ -90,7 +90,7 @@ public class SellerDashFragment extends Fragment {
         // Pull seller class from sellerViewModel
         OrderDB orderDB = OrderDB.getInstance(getContext());
 
-        ReceiveOrderAdapter receiveOrderAdapter = new ReceiveOrderAdapter(orderDB, seller);
+        ReceiveOrderAdapter receiveOrderAdapter = new ReceiveOrderAdapter(orderDB.getProductsFromOrderBySeller(seller), seller);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         orderList.setLayoutManager(layoutManager);
         orderList.setAdapter(receiveOrderAdapter);

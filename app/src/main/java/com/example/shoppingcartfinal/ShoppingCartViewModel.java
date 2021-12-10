@@ -12,7 +12,7 @@ public class ShoppingCartViewModel extends ViewModel {
     /**
      * Empty Constructor
      */
-    ShoppingCartViewModel() {
+    public ShoppingCartViewModel() {
 
     }
 

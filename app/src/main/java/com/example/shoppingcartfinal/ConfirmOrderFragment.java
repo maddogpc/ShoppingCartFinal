@@ -89,7 +89,8 @@ public class ConfirmOrderFragment extends Fragment {
         super.onStart();
         OrderViewModel orderViewModel = ViewModelProviders.of(getActivity()).get(OrderViewModel.class);
         Order order = orderViewModel.getOrder();
-        if (order != null)
+        System.out.println("e " + order.getBuyerName());
+        try
         {
             buyerName.setText("Orderer: " + order.getBuyerName() + "(" + order.getBuyerEmail() + ")");
             cardNumber.setText("Card: " + order.getCardInfo().getCarNum());
@@ -103,11 +104,12 @@ public class ConfirmOrderFragment extends Fragment {
             orderedList.setLayoutManager(layoutManager);
             orderedList.setAdapter(orderAdapter);
 
+            OrderDB orderDB = OrderDB.getInstance(getContext());
+
             totalSpend.setText(Double.toString(order.getTotalCostCost()));
             confirmOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    OrderDB orderDB = OrderDB.getInstance(getContext());
                     orderDB.addOrder(order);
                     orderDB.saveDB(false);
                     Navigation.findNavController(view).navigate(R.id.buyerDashFragment);
@@ -119,6 +121,8 @@ public class ConfirmOrderFragment extends Fragment {
                     Navigation.findNavController(view).navigate(R.id.checkoutFragment);
                 }
             });
+        } catch (NullPointerException n) {
+            n.printStackTrace();
         }
     }
 }

@@ -90,8 +90,8 @@ public class ProductDB {
         if (clearDataBase) {
             ProductDB PDB = new ProductDB(context,
                     new Product(new ConcreteProductBuilder().setProductName("name1").setProductCost(5.00).setProductDesc("desc1").setProductSeller("seller1")),
-                            new Product(new ConcreteProductBuilder().setProductName("name2").setProductCost(5.00).setProductDesc("desc2").setProductSeller("seller2")),
-                                    new Product(new ConcreteProductBuilder().setProductName("name3").setProductCost(5.00).setProductDesc("desc3").setProductSeller("seller3"))
+                    new Product(new ConcreteProductBuilder().setProductName("name2").setProductCost(5.00).setProductDesc("desc2").setProductSeller("seller2")),
+                    new Product(new ConcreteProductBuilder().setProductName("name3").setProductCost(5.00).setProductDesc("desc3").setProductSeller("seller3"))
             );
             ProductListObj = PDB.products;
         }
@@ -163,11 +163,14 @@ public class ProductDB {
     public ArrayList<Product> listProductsBySeller(String sellerName) {
         ArrayList<Product> list = new ArrayList<Product>();
         for (Product prod : products) {
-            if (prod.seller == sellerName) {
+            if (prod.getSeller().equals(sellerName)) {
                 list.add(prod);
             }
         }
         return list;
         // raise exception if not found
     }
+
+
 }
+

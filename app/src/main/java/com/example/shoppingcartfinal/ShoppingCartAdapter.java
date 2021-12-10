@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             public void onClick(View view) {
                 Product currentProduct = products.get(holder.getAdapterPosition());
                 shoppingCart.removeFromShoppingCart(currentProduct);
+                Navigation.findNavController(view).navigate(R.id.shoppingCartFragment);
             }
         });
     }

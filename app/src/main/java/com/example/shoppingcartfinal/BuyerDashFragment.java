@@ -72,6 +72,7 @@ public class BuyerDashFragment extends Fragment {
         // To Shopping Cart button
         toShoppingCart = (Button) view.findViewById(R.id.toShoppingCart);
         dashRV = (RecyclerView) view.findViewById(R.id.drv);
+        System.out.println("eeee");
 
         return view;
     }
@@ -81,7 +82,7 @@ public class BuyerDashFragment extends Fragment {
         super.onStart();
 
         ProductDB productDB = new ProductDB(getContext());
-        ProductViewModel productViewModel = ViewModelProviders.of(requireActivity()).get(ProductViewModel.class);
+        ProductViewModel productViewModel = ViewModelProviders.of(getActivity()).get(ProductViewModel.class);
 
         // Initializes the RecyclerView list
         ProductAdapter productAdapter = new ProductAdapter(productDB.getProducts(), productViewModel);

@@ -62,7 +62,7 @@ public class Order implements java.io.Serializable {
         ArrayList<Product> products = new ArrayList<>();
         if (seller instanceof Seller) {
             for (Product product : getProducts()) {
-                if (product.getSeller() == seller.getName()) {
+                if (product.getSeller().equals(seller.getName())) {
                     products.add(product);
                 }
             }

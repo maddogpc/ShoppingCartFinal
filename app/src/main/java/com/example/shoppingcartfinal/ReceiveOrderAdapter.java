@@ -16,10 +16,9 @@ public class ReceiveOrderAdapter extends RecyclerView.Adapter<ReceiveOrderAdapte
     private User seller;
     ArrayList<Order> filteredOrders;
 
-    public ReceiveOrderAdapter(OrderDB orderDB, User seller) {
-        this.orderDB = orderDB;
+    public ReceiveOrderAdapter(ArrayList<Order> filteredOrders, User seller) {
         this.seller = seller;
-        filteredOrders = orderDB.getProductsFromOrderBySeller(seller);
+        this.filteredOrders = filteredOrders;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -40,7 +39,7 @@ public class ReceiveOrderAdapter extends RecyclerView.Adapter<ReceiveOrderAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReceiveOrderAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ReceiveOrderAdapter.ViewHolder holder, int position) throws NullPointerException {
 
         String s = "";
         for (int i = 0; i < filteredOrders.get(position).getProducts().size(); i++)

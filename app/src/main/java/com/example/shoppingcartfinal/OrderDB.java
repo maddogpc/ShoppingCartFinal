@@ -29,8 +29,9 @@ public class OrderDB {
         boolean ioExcept = false;
         try {
             System.out.println("/storage/self/primary/Android/data/com.example.shoppingcartfinal/files/ProductDB");
-            FileInputStream fileIn = new FileInputStream("/storage/self/primary/Android/data/com.example.shoppingcartfinal/files/ProductDB");
+            FileInputStream fileIn = new FileInputStream("/storage/self/primary/Android/data/com.example.shoppingcartfinal/files/OrdersDB");
             ObjectInputStream in = new ObjectInputStream(fileIn);
+
             orders = (ArrayList<Order>) in.readObject();
 //            for (Order ord : orders) {
 //                System.out.println(ord.buyerEmail);
@@ -62,9 +63,15 @@ public class OrderDB {
     public OrderDB(Context con, Order ... ords) {
         this.context = con;
         orders = new ArrayList<Order>();
-        for (Order ord : ords) {
-            addOrder(ord);
+        if (ords != null) {
+            for (Order ord : ords) {
+                addOrder(ord);
+            }
         }
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
     }
 
     /**
@@ -76,7 +83,10 @@ public class OrderDB {
     public void saveDB (boolean clearDataBase) {
         ArrayList<Order> OrderListObj;
         if (clearDataBase) {
-            OrderDB ODB = new OrderDB(context);
+            ArrayList<Product> products = new ArrayList<>();
+            products.add(new Product(new ConcreteProductBuilder().setProductSeller("1").setProductDesc("1").setProductCost(3.1).setProductName("1")));
+            OrderDB ODB = new OrderDB(context, new Order("a","a",new Card("1","1","1","d"), new ShippingDetails("1","a","a","a","33"), products));
+
             OrderListObj = ODB.orders;
         }
         else {
@@ -157,11 +167,16 @@ public class OrderDB {
     public ArrayList<Order> getProductsFromOrderBySeller(User sObj) {
         ArrayList<Order> list = new ArrayList<>();
         //ArrayList<Product> plist = new ArrayList<>();
-        if (sObj instanceof Seller) {
-            for (Order order : orders) {
-                ArrayList<Product> plist = order.getProductsBySellerName(sObj);
-                list.add(new Order(order.getBuyerName(), order.getBuyerEmail(), order.getCardInfo(), order.getShippingDetails(), plist));
+        try {
+            if (sObj instanceof Seller) {
+                for (Order order : orders) {
+                    ArrayList<Product> plist = order.getProductsBySellerName(sObj);
+                    list.add(new Order(order.getBuyerName(), order.getBuyerEmail(), order.getCardInfo(), order.getShippingDetails(), plist));
+                }
             }
+        }
+        catch (NullPointerException n) {
+            n.printStackTrace();
         }
         return list;
         // raise exception if not found

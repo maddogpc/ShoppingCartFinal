@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -69,7 +70,7 @@ public class AddProductFragment extends Fragment {
         pCost = (EditText) view.findViewById(R.id.pcost);
         pDesc = (EditText) view.findViewById(R.id.pdesc);
         pConfirm = (Button) view.findViewById(R.id.confirmProduct);
-        pConfirm = (Button) view.findViewById(R.id.cancelProduct);
+        pCancel = (Button) view.findViewById(R.id.cancelProduct);
         return view;
     }
     @Override
@@ -79,15 +80,21 @@ public class AddProductFragment extends Fragment {
         ConcreteViewModel sellerViewModel = ViewModelProviders.of(requireActivity()).get(ConcreteViewModel.class);
         // Pull seller class from sellerViewModel
         User seller = sellerViewModel.getUser();
-        String myPName, myPCost, myPDesc;
-        myPName = pName.getText().toString();
-        myPCost = pCost.getText().toString();
-        myPDesc = pDesc.getText().toString();
+
         pConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addProduct(myPName, myPCost, myPDesc, seller.getName());
-                Navigation.findNavController(view).navigate(R.id.inventoryFragment);
+                try {
+                    final String myPName = pName.getText().toString();
+                    final String myPCost = pCost.getText().toString();
+                    final String myPDesc = pDesc.getText().toString();
+                    addProduct(myPName, myPCost, myPDesc, seller.getName());
+                    Navigation.findNavController(view).navigate(R.id.inventoryFragment);
+                }
+                catch (NullPointerException n) {
+                    n.printStackTrace();
+                    Toast.makeText(getContext(), "No input on either field", Toast.LENGTH_SHORT);
+                }
             }
         });
         pCancel.setOnClickListener(new View.OnClickListener() {

@@ -5,7 +5,7 @@ public class ShippingDetails {
     String city;
     String region;
     String country;
-    Integer zip;
+    String zip;
 
     public String getAddress() {
         return address;
@@ -23,11 +23,11 @@ public class ShippingDetails {
         return country;
     }
 
-    public Integer getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public ShippingDetails(String address, String city, String region, String country, Integer zip) {
+    public ShippingDetails(String address, String city, String region, String country, String zip) {
         this.address = address;
         this.city = city;
         this.region = region;

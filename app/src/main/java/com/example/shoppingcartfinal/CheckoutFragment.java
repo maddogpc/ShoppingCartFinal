@@ -1,17 +1,16 @@
 package com.example.shoppingcartfinal;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 
@@ -88,10 +87,22 @@ public class CheckoutFragment extends Fragment {
         ConcreteViewModel concreteViewModel = ViewModelProviders.of(getActivity()).get(ConcreteViewModel.class);
         ShoppingCartViewModel shoppingCartViewModel = ViewModelProviders.of(getActivity()).get(ShoppingCartViewModel.class);
         User buyer = concreteViewModel.getUser();
-        ShoppingCart shoppingCart = shoppingCartViewModel.getShoppingCart();
-        Card card = (Card) buyer.getObject("Card");
-        ShippingDetails shippingDetails = (ShippingDetails) buyer.getObject("ShippingDetails");
-        if (card != null)
+        ShoppingCart shoppingCart = ShoppingCart.getInstance();
+        Card card = null;
+        ShippingDetails shippingDetails = null;
+        Boolean present = false;
+        try {
+            card = (Card) buyer.getObject("Card");
+            shippingDetails = (ShippingDetails) buyer.getObject("ShippingDetails");
+            if (card != null || shippingDetails != null) {
+                present = true;
+            }
+        }
+        catch (NullPointerException n) {
+            System.out.println("Either card or shipping details is missing");
+        }
+
+        if (present)
         {
             existingCard.setText("Existing card " + card.getCarNum());
         }
@@ -99,6 +110,11 @@ public class CheckoutFragment extends Fragment {
         {
             existingCard.setText("No card available");
         }
+
+        final Boolean isPresent = present;
+        final Card isCard = card;
+        final ShippingDetails isShipped = shippingDetails;
+
         addCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,13 +138,13 @@ public class CheckoutFragment extends Fragment {
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (card == null || shippingDetails == null)
+                if (!isPresent)
                 {
                     Toast.makeText(getContext(), "Card and Shipping details are required before placing an order", Toast.LENGTH_SHORT);
                 }
                 else
                 {
-                    createOrder(buyer, card, shippingDetails, shoppingCart.getProducts());
+                    createOrder(buyer, isCard, isShipped, shoppingCart.getProducts());
                     Navigation.findNavController(view).navigate(R.id.confirmOrderFragment);
                 }
             }

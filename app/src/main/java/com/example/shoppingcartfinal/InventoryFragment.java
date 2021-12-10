@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,6 +71,7 @@ public class InventoryFragment extends Fragment {
         // Get ViewModel
         // To Shopping Cart button
         toSDash = (Button) view.findViewById(R.id.toSDash);
+        addProduct = (Button) view.findViewById(R.id.addProduct);
 
         return view;
     }
@@ -79,8 +81,10 @@ public class InventoryFragment extends Fragment {
         super.onStart();
 
         ProductDB products = ProductDB.getInstance(getContext());
+        ConcreteViewModel concreteViewModel = ViewModelProviders.of(getActivity()).get(ConcreteViewModel.class);
+        User seller = concreteViewModel.getUser();
 
-        InventoryAdapter inventoryAdapter = new InventoryAdapter(products.getProducts());
+        InventoryAdapter inventoryAdapter = new InventoryAdapter(products.listProductsBySeller(seller.getName()));
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         inventory.setLayoutManager(layoutManager);
         inventory.setAdapter(inventoryAdapter);

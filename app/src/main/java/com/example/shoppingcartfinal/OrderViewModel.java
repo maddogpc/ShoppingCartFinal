@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
  */
 public class OrderViewModel extends ViewModel {
     Order order;
-    OrderViewModel() {
+    public OrderViewModel() {
 
     }
 

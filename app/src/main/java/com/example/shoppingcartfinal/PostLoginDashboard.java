@@ -104,9 +104,14 @@ public class PostLoginDashboard extends AppCompatActivity {
                             }
                             else
                             {
+                                System.out.println("dd");
                                 ShoppingCart shoppingCart = ShoppingCart.getInstance();
+                                System.out.println("dd2");
                                 ShoppingCartViewModel shoppingCartViewModel = new ShoppingCartViewModel();
+                                System.out.println("dd3");
                                 shoppingCartViewModel.setShoppingCart(shoppingCart);
+                                System.out.println("dd2");
+                                selectFragment(navGraph, navController, finalCurrentUser);
                                 concreteViewModel.setUser(finalCurrentUser);
                             }
                         }

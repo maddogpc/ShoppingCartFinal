@@ -82,13 +82,14 @@ public class ProductPageFragment extends Fragment {
         ProductViewModel productViewModel = ViewModelProviders.of(getActivity()).get(ProductViewModel.class);
         ShoppingCartViewModel shoppingCartViewModel = ViewModelProviders.of(getActivity()).get(ShoppingCartViewModel.class);
         Product product = productViewModel.getProduct();
-        ShoppingCart shoppingCart = shoppingCartViewModel.getShoppingCart();
+        ShoppingCart shoppingCart = ShoppingCart.getInstance();
         // Set text of product details
         productName.setText(product.getName());
         productCost.setText(Double.toString(product.getCost()));
         productDesc.setText(product.getDescription());
         productProvider.setText(product.getSeller());
         // Click listener to add product to shopping cart
+        System.out.println("ee" + shoppingCart);
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -14,11 +14,9 @@ import java.util.ArrayList;
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.ViewHolder> {
 
     private ArrayList<Product> products;
-    private ProductViewModel productViewModel;
 
     public InventoryAdapter(ArrayList<Product> products) {
         this.products = products;
-        this.productViewModel = productViewModel;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -44,7 +42,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     public void onBindViewHolder(@NonNull InventoryAdapter.ViewHolder holder, int position) {
         String productName = products.get(position).getName();
         String productCost = Double.toString(products.get(position).getCost());
-        holder.pName.setText(productName);
+        holder.pName.setText(productName + " " + products.get(position).getSeller());
         holder.pCost.setText(productCost);/*
         holder.viewProduct.setOnClickListener(new View.OnClickListener() {
             @Override

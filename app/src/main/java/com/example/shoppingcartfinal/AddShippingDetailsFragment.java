@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -82,17 +83,24 @@ public class AddShippingDetailsFragment extends Fragment {
         ConcreteViewModel buyerViewModel = ViewModelProviders.of(getActivity()).get(ConcreteViewModel.class);
         // Pull seller class from sellerViewModel
         User buyer = buyerViewModel.getUser();
-        String mySAddr, mySCity, mySReg, mySNat, mySZIP;
-        mySAddr = sAddr.getText().toString();
-        mySCity = sCity.getText().toString();
-        mySReg = sReg.getText().toString();
-        mySNat = sNat.getText().toString();
-        mySZIP = sZIP.getText().toString();
         sConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addSD(mySAddr, mySCity, mySReg, mySNat, mySZIP, buyer);
-                Navigation.findNavController(view).navigate(R.id.checkoutFragment);
+                try {
+                    final String mySAddr = sAddr.getText().toString();
+                    final String mySCity = sCity.getText().toString();
+                    final String mySReg = sReg.getText().toString();
+                    final String mySNat = sNat.getText().toString();
+                    final String mySZIP = sZIP.getText().toString();
+                    addSD(mySAddr, mySCity, mySReg, mySNat, mySZIP, buyer);
+                    Navigation.findNavController(view).navigate(R.id.checkoutFragment);
+                } catch (NumberFormatException n) {
+                    n.printStackTrace();
+                    Toast.makeText(getContext(), "No input on either field", Toast.LENGTH_SHORT);
+                } catch (NullPointerException n) {
+                    n.printStackTrace();
+                    Toast.makeText(getContext(), "No input on either field", Toast.LENGTH_SHORT);
+                }
             }
         });
         sCancel.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +112,7 @@ public class AddShippingDetailsFragment extends Fragment {
     }
 
     public void addSD(String addr, String city, String reg, String nat, String ZIP, User buyer) {
-        ShippingDetails shippingDetails = new ShippingDetails(addr, city, reg, nat, Integer.parseInt(ZIP));
+        ShippingDetails shippingDetails = new ShippingDetails(addr, city, reg, nat, ZIP);
         buyer.addObject(shippingDetails);
     }
 }
